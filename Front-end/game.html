@@ -6,6 +6,7 @@
   </head>
   <body>
     <script>
+    var visible = [0,0,0,0,0,0,0,0];
     var Container = PIXI.Container;
     var AutoDetectRenderer = PIXI.autoDetectRenderer;
     var Loader = PIXI.loader;
@@ -17,10 +18,14 @@
     var Graphics = PIXI.Graphics;
     var Text = PIXI.Text;
 
-    var renderer = AutoDetectRenderer(1024, 768);
+    var renderer = AutoDetectRenderer(1024, 768, { transparent: true });
     document.body.appendChild(renderer.view);
     var mainScene=new Container();
     var stage=new Container();
+
+    var sprite;
+    var spriteCards=new Array(8);
+    var ntt=new Array(8);
 
     Loader
     .add("assets/background.jpg")
@@ -35,43 +40,164 @@
     }
 
     function setup() {
-      var textureGuard=TextureCache["verso.png"];
+      var textureBackground=TextureCache["assets/background.jpg"];
+
+      var textureGuard=TextureCache["guard.png"];
+      var texturePriest=TextureCache["priest.png"];
+      var textureBaron=TextureCache["baron.png"];
+      var textureHandmaid=TextureCache["handmaid.png"];
+      var texturePrince=TextureCache["prince.png"];
+      var textureKing=TextureCache["king.png"];
+      var textureCountess=TextureCache["countess.png"];
+      var texturePrincess=TextureCache["princess.png"];
+
+      var textureVerso=TextureCache["verso.png"];
+
+      ntt[0]=textureGuard;
+      ntt[1]=texturePriest;
+      ntt[2]=textureBaron;
+      ntt[3]=textureHandmaid;
+      ntt[4]=texturePrince;
+      ntt[5]=textureKing;
+      ntt[6]=textureCountess;
+      ntt[7]=texturePrincess;
+
+      for (let i=0;i<8;i++) {
+        spriteCards[i]=new Sprite(textureVerso);
+        spriteCards[i].interactive = true;
+        spriteCards[i].anchor.set(0.5,0.5);
+        spriteCards[i].alpha=0;
+
+        spriteCards[i].on("mouseover", function(e){
+          if (isVisible(i)) {
+              this.alpha=0.75;
+          }
+        })
+
+        spriteCards[i].on("mouseout", function(e){
+          if (isVisible(i)) {
+            this.alpha=1;
+          }
+        })
+
+      }
+
+      setVisible(1,true);
+      /*spriteCards[0].x=450;
+      spriteCards[0].y=800-100;*/
+
+      spriteCards[0].x=921/2-127/2;
+      spriteCards[0].y=679;
+
+      spriteCards[1].x=921/2+127/2;
+      spriteCards[1].y=679;
+
+      spriteCards[2].rotation=Math.radians(-90);
+      spriteCards[2].x=175/2+745;
+      spriteCards[2].y=400;
+
+      spriteCards[3].rotation=Math.radians(-90);
+      spriteCards[3].x=175/2+745;
+      spriteCards[3].y=400-127.5;
+
+      spriteCards[4].rotation=Math.radians(180);
+      spriteCards[4].x=921/2+127/2;
+      spriteCards[4].y=175/2;
+
+      spriteCards[5].rotation=Math.radians(180);
+      spriteCards[5].x=921/2-127/2;
+      spriteCards[5].y=175/2;
+
+      spriteCards[6].rotation=Math.radians(90);
+      spriteCards[6].x=175/2;
+      spriteCards[6].y=400;
+
+      spriteCards[7].rotation=Math.radians(90);
+      spriteCards[7].x=175/2;
+      spriteCards[7].y=400-127.5;
+
+      sprite=spriteCards[0];
+      //sprite.anchor.set(0.5,0.5);
+      /*var textureGuard=TextureCache["verso.png"];
       var texture6=TextureCache["6.png"];
 
+
       sprite6=new Sprite(texture6);
-      spriteGuard=new Sprite(textureGuard);
-      spriteGuard.interactive = true;
+      spriteGuard=new Sprite(textureGuard);/*/
+      spriteBackground=new Sprite(textureBackground);
+      mainScene.addChild(spriteBackground);
 
-      var onMouseOver=false;
-      spriteGuard.on("mouseover", function(e){
-        spriteGuard.alpha=0.5;
-      })
-
-      spriteGuard.on("mouseout", function(e){
-        spriteGuard.alpha=1;
-      })
-
-      mainScene.addChild(spriteGuard);
-      mainScene.addChild(sprite6);
+      for (let i=0;i<8;i++) {
+        mainScene.addChild(spriteCards[i]);
+      }
       stage.addChild(mainScene);
+
+      addCardToPlayer(1,8);
+      setVisible(0,true);
       state=play;
       gameLoop();
     }
 
-    function gameLoop() {
+    //Player (1-4) Card (1-8 -> guard-princess 9->verso)
+    function addCardToPlayer(player,card) {
+      console.log("addCardToPlayer : (player : "+player+") (card : "+card+")");
+      switch (player) {
+        default:
+        case 1:
+          spriteCards[1].texture=numberToTexture(card);
+          setVisible(1,true);
+          break;
+        case 2:
+          spriteCards[3].texture=numberToTexture(card);
+          setVisible(3,true);
+          break;
+        case 3:
+          spriteCards[5].texture=numberToTexture(card);
+          setVisible(5,true);
+          break;
+        case 4:
+          spriteCards[7].texture=numberToTexture(card);
+          setVisible(7,true);
+          break;
+      }
+    }
+
+    //number : 1-8 -> guard-princess 9->verso)
+    function numberToTexture(number) {
+      console.log("numberToTexture : (number : "+number+")");
+      return ntt[number-1];
+    }
+
+
+    //numcard : 0-7 visibility : true/false
+    function setVisible(numcard,visibility) {
+      visible[numcard]=visibility;
+      if (visibility) {
+          spriteCards[numcard].alpha=1;
+      } else {
+          spriteCards[numcard].alpha=0;
+      }
+
+    }
+
+    //numcard : 0-7
+    function isVisible(numcard) {
+      return visible[numcard];
+    }
+
+    function gameLoop(test) {
       //Loop this function 60 times per second
       requestAnimationFrame(gameLoop);
 
       //Update the current game state:
       state();
-
+      //sprite.rotation += 0.1;
       //Render the gameScene
       renderer.render(stage);
     }
 
     var explorerHit=false;
     function play() {
-      
     }
 
     function keyboard(keyCode) {
@@ -193,6 +319,16 @@
       //Return the `collision` value
       return collision;
     }
+
+    // Converts from degrees to radians.
+    Math.radians = function(degrees) {
+      return degrees * Math.PI / 180;
+    };
+
+    // Converts from radians to degrees.
+    Math.degrees = function(radians) {
+      return radians * 180 / Math.PI;
+    };
     </script>
   </body>
 </html>
