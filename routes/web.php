@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('play');
 });
+
+
+//Route::get('/update',)
+//Ici une rediraction vers un controlleur qui renvoie un objet Etat (en json)
+//avec un filtre des cartes selon le joueur
