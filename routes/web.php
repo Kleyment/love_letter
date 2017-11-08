@@ -10,11 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Controllers\ValiderPseudo;
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/play', function () {
     return view('play');
 });
 
+Route::get('/name/{pseudo}',"ValiderPseudo@validerPseudo");
 
 //Route::get('/update',)
 //Ici une rediraction vers un controlleur qui renvoie un objet Etat (en json)

@@ -1,0 +1,16 @@
+h1 {
+  color: blue;
+}
+
+body {
+  text-align: center;
+  background-image: url("/regular-cards.jpg");
+  background-size: cover;
+  margin: auto;
+}
+
+input.invalid {
+  outline-offset: -2px;
+  outline: 2px solid #ff3500;
+  background: url(/css/form-error.png) 98% 50% no-repeat #fff1f2;
+}
