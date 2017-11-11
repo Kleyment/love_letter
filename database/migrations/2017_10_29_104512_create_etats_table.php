@@ -27,7 +27,6 @@ class CreateEtatsTable extends Migration
             $table->integer('defausse');
             $table->integer('nbdefausse');
             $table->integer('nbpioche');
-            $table->timestamps();
         });
     }
 

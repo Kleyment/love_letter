@@ -18,7 +18,6 @@ class CreatePiochesTable extends Migration
             $table->integer('idpartie');
             $table->integer('position'); //1-16 (1 signifie le haut de la pioche)
             $table->integer('typecarte'); //1-8
-            $table->timestamps();
         });
     }
 

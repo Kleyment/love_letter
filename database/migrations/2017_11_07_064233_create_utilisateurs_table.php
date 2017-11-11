@@ -18,7 +18,6 @@ class CreateUtilisateursTable extends Migration
             $table->string('pseudo');
             $table->string('token');
             $table->integer('idpartie');
-            $table->timestamps();
         });
     }
 

@@ -7,8 +7,7 @@ use App\Utilisateur;
 
 class ValiderPseudo extends Controller
 {
-  public function validerPseudo($pseudo)
-  {
+  public function validerPseudo($pseudo) {
     $reponse=array('type' => 1);
 
     if (strlen($pseudo) < 4) {
@@ -22,6 +21,19 @@ class ValiderPseudo extends Controller
       } else {
         $reponse['pseudoOk']=true;
       }
+    }
+    return $reponse;
+  }
+
+  public function annulerPseudo() {
+    $reponse=array('type' => 2);
+
+    $annulerPseudo=Utilisateur::annulerPseudo();
+    if ($annulerPseudo) {
+      $reponse['annulerPseudoOk']=true;
+    } else {
+      $reponse['annulerPseudoOk']=false;
+      $reponse['reason']='Ce n\'est pas votre pseudo';
     }
     return $reponse;
   }

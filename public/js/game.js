@@ -21,6 +21,8 @@ var spriteCards=new Array(10);
 //8 : bin
 //9 : stack
 
+
+
 var ntt=new Array(8);
 
 Loader

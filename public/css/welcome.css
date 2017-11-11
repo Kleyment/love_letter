@@ -14,3 +14,41 @@ input.invalid {
   outline: 2px solid #ff3500;
   background: url(/css/form-error.png) 98% 50% no-repeat #fff1f2;
 }
+
+#okButton {
+    width: 5em;
+    height: 2em;
+    background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    color: #fff;
+}
+
+
+#okButton:hover {
+  background: linear-gradient(#79bc64, #578843);
+}
+
+#cancelButton {
+    width: 5em;
+    height: 2em;
+    background: linear-gradient(#ae8155, #f2350c);
+    background-color: rgba(0, 0, 0, 0);
+    background-color: #a7614e;
+    box-shadow: inset 0 1px 1px #e3a588;
+    border-color: #6e3222 #6e2d22 #e0635e;
+    color: #fff;
+}
+
+#cancelButton:hover {
+  background: linear-gradient(#d69c7b, #f2350c);
+}
+
+.forms {
+  display: inline;
+}
+
+.invisible {
+  display: none;
+}

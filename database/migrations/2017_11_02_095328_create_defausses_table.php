@@ -19,7 +19,6 @@ class CreateDefaussesTable extends Migration
             $table->integer('position'); //1-16 (1 signifie haut de la défausse)
             $table->integer('typecarte');  //1-8 le type de la carte défaussé
             $table->integer('idjoueur'); //L'id du joueur qui a défaussé sa carte
-            $table->timestamps();
         });
     }
 

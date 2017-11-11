@@ -22,7 +22,6 @@ class CreateToursTable extends Migration
             //Optionnels
             $table->integer('idvictime'); //1-4
             $table->integer('typecarte'); //1-8
-            $table->timestamps();
         });
     }
 

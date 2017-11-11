@@ -19,7 +19,6 @@ class CreateMainsTable extends Migration
             $table->integer('idjoueur');
             $table->integer('carteg'); //Carte gauche
             $table->integer('carted'); //Carte droite
-            $table->timestamps();
         });
     }
 
