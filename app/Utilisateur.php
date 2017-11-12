@@ -29,30 +29,29 @@ class Utilisateur extends Model
     return Utilisateur::where('pseudo', $pseudo)->get()->first();
   }
 
-  public static function annulerPseudo() {
-    if (isset($_COOKIE['pseudo']) && isset($_COOKIE['token'])) {
-      $pseudo=$_COOKIE['pseudo'];
-      $token=$_COOKIE['token'];
-      $utilisateur=Utilisateur::where('pseudo', $pseudo)->get()->first();
-      if (($utilisateur) && ($utilisateur->token == $token)) {
-        setcookie("pseudo", "", time() - 3600,'/');
-        setcookie("token", "", time() - 3600,'/');
-        $utilisateur->delete();
-        return true;
-      } else {
-        setcookie("pseudo", "", time() - 3600,'/');
-        setcookie("token", "", time() - 3600,'/');
-        return false;
-      }
+  public static function getUtilisateurFromPseudoToken($pseudo,$token) {
+    //TODO Ajouter un where pour le token
+    $utilisateur=Utilisateur::where('pseudo', $pseudo)->get()->first();
+    if ($utilisateur && ($utilisateur->token == $token)) {
+      return $utilisateur;
+    } else {
+      return false;
     }
-    return false;
   }
 
+  public static function detruireCookiesUtilisateur() {
+    setcookie("pseudo", "", time() - 3600,'/');
+    setcookie("token", "", time() - 3600,'/');
+  }
 
-  public static function aUnePartie($pseudo) {
-    if ((Utilisateur::where('pseudo', $pseudo)->get()->first()->idpartie) == -1) {
+  public function annulerPseudo() {
+    $this->delete();
+  }
+
+  public function aUnePartie() {
+    if ($this->idpartie == -1) {
       return false;
-    } else if ((Utilisateur::where('pseudo', $pseudo)->get()->first()->idpartie) > -1) {
+    } else {
       return true;
     }
   }
