@@ -14,11 +14,11 @@ class ValiderPseudo extends Controller
       $reponse['pseudoOk']=false;
       $reponse['reason']='Le pseudo est inférieur à 4 caractères';
     } else {
-      $pseudolibre=Utilisateur::utiliserPseudo($pseudo);
-      if (!$pseudolibre) {
+      if (Utilisateur::getUtilisateurFromPseudo($pseudo)) {
         $reponse['pseudoOk']=false;
         $reponse['reason']='Quelqu\'un a déjà ce pseudo';
       } else {
+        Utilisateur::creerUtilisateur($pseudo);
         $reponse['pseudoOk']=true;
       }
     }

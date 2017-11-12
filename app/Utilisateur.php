@@ -16,13 +16,17 @@ class Utilisateur extends Model
       'pseudo', 'token', 'idpartie',
   ];
 
-  public static function utiliserPseudo($pseudo) {
-    if (Utilisateur::where('pseudo', $pseudo)->get()->first()) {
-      return false;
-    } else {
-      self::creerCookies($pseudo);
-      return true;
-    }
+  public static function creerUtilisateur($pseudo) {
+    //String à hasher, il contient un sel, le temps actuel et un nombre aléatoire
+    $stringToHash="azez5f6ze5".time().rand();
+    $token=hash("sha256",$stringToHash);
+    setcookie('pseudo',$pseudo,0,'/');
+    setcookie('token',$token,0,'/');
+    Utilisateur::create(["pseudo" => $pseudo, 'token' => $token]);
+  }
+
+  public static function getUtilisateurFromPseudo($pseudo) {
+    return Utilisateur::where('pseudo', $pseudo)->get()->first();
   }
 
   public static function annulerPseudo() {
@@ -44,14 +48,6 @@ class Utilisateur extends Model
     return false;
   }
 
-  public static function creerCookies($pseudo) {
-    //String à hasher, il contient un sel, le temps actuel et un nombre aléatoire
-    $stringToHash="azez5f6ze5".time().rand();
-    $token=hash("sha256",$stringToHash);
-    setcookie('pseudo',$pseudo,0,'/');
-    setcookie('token',$token,0,'/');
-    Utilisateur::create(["pseudo" => $pseudo, 'token' => $token]);
-  }
 
   public static function aUnePartie($pseudo) {
     if ((Utilisateur::where('pseudo', $pseudo)->get()->first()->idpartie) == -1) {
