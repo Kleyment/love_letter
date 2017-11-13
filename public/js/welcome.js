@@ -39,8 +39,10 @@ function annulerPseudoOk() {
 }
 
 function annulerPseudoKo(reason) {
-  console.log(reason);
+  //console.log(reason);
+  afficherReason(reason);
 }
+
 
 //Appelé si le nom est valide, suprime le bouton
 function validerPseudoOk() {
@@ -53,7 +55,8 @@ function validerPseudoOk() {
 //Appelé si le nom est invalide, affiche une croix rouge sur le nom
 function validerPseudoKo(reason) {
   document.getElementById("name").className="invalid";
-  console.log(reason);
+  //console.log(reason);
+  afficherReason(reason);
 }
 
 //Réinitialise les boutons bloqués et la croix rouge
@@ -62,10 +65,25 @@ function reset() {
   document.getElementById("okButton").disabled=false;
   document.getElementById("name").className="";
   document.getElementById("cancelButton").className="invisible";
+  document.getElementById("reason").className="invisible";
 
   var okButton=document.getElementById("okButton");
   okButton.disabled=false;
   okButton.className="";
+}
+
+//Affiche pourquoi le pseudo est invalide (ou pourquoi l'annulation de pseudo est invalide)
+function afficherReason(reason) {
+  var reasonh2=document.getElementById("reason");
+  reasonh2.innerHTML=reason;
+  reasonh2.className="";
+  window.setTimeout(effacerReason, 3000);
+}
+
+function effacerReason() {
+  var reasonh2=document.getElementById("reason");
+  reasonh2.innerHTML="";
+  reasonh2.className="invisible";
 }
 
 //Méthode automatiquement appelé au chargement de la page - Mise en place de l'AJAX

@@ -22,6 +22,6 @@
     <form class="forms" action="#" onsubmit="return annulerPseudo(this);">
       <input id="cancelButton" type="submit" value="Annuler">
     </form>
-    <h5 id="reason"><h5>
+    <h2 id="reason"><h2>
   </body>
 </html>
