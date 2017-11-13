@@ -55,4 +55,9 @@ class Utilisateur extends Model
       return true;
     }
   }
+
+  public function assignerAUnePartie($idpartie) {
+    $this->idpartie=$idpartie;
+    $this->save();
+  }
 }

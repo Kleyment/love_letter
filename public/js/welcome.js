@@ -50,6 +50,7 @@ function validerPseudoOk() {
   document.getElementById("name").disabled=true;
   document.getElementById("okButton").className="invisible";
   document.getElementById("cancelButton").className="";
+  document.getElementById("vueSalon").className="";
 }
 
 //Appelé si le nom est invalide, affiche une croix rouge sur le nom
@@ -66,6 +67,7 @@ function reset() {
   document.getElementById("name").className="";
   document.getElementById("cancelButton").className="invisible";
   document.getElementById("reason").className="invisible";
+  document.getElementById("vueSalon").className="invisible";
 
   var okButton=document.getElementById("okButton");
   okButton.disabled=false;
@@ -86,11 +88,32 @@ function effacerReason() {
   reasonh2.className="invisible";
 }
 
-//Méthode automatiquement appelé au chargement de la page - Mise en place de l'AJAX
-function main(pseudo) {
-  if (pseudo) {
-    alert(pseudo);
+function afficherSalon() {
+  xhr.open("GET", "/parties/", true);
+  xhr.send();
+}
+
+function afficherSalonOk(response) {
+  var listeSalon=document.getElementById("listeSalon");
+  for (let i=0;i<response['taille'];i++) {
+    var a = document.createElement("a");
+    var span = document.createElement("span");
+    //TODO
+    a.setAttribute("href","");
+    span.className="badge float-xs-right";
+    span.innerHTML=response[i]['nbjoueurs'];
+
+    listeSalon.appendChild(a);
+    listeSalon.appendChild(span);
   }
+}
+
+function afficherSalonKo() {
+  console.log("Erreur lors de l'affichage des salons")
+}
+
+//Méthode automatiquement appelé au chargement de la page - Mise en place de l'AJAX
+function main() {
   reset();
   xhr = new window.XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -113,15 +136,14 @@ function main(pseudo) {
                   } else {
                     annulerPseudoKo(response["reason"]);
                   }
+                  break;
+                //Cas 3 requête chaque seconde des salons
+                case 3:
+                  afficherSalonOk(response);
               }
               //previousresponse=xhr.responseText;
           }
       }
   };
-}
-
-function update() {
-    xhr.open("GET", "/updateplayer/", true);
-    xhr.send();
-    setTimeout(update, 1000);
+  setInterval(afficherSalon, 1000);
 }

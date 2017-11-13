@@ -21,6 +21,11 @@ Route::get('/play', function () {
 Route::get('/name/{pseudo}',"ValiderPseudo@validerPseudo");
 Route::get('/cancelname/',"ValiderPseudo@annulerPseudo");
 
+Route::get('/creerPartie/{nbjoueurs}',"ControlleurParties@creerPartie");
+Route::get('/rejoindrePartie/{idpartie}',"ControlleurParties@rejoindrePartie");
+Route::get('/parties',"ControlleurParties@toutesLesParties");
+
+
 
 //Route::get('/update',)
 //Ici une rediraction vers un controlleur qui renvoie un objet Etat (en json)
