@@ -27,9 +27,8 @@
       <div class="page-header">
         <h2>Liste des parties</h2>
       </div>
-      <ul class="list-group col-md-4">
-        <li id="listeSalon"class="list-group-item">
-          <!--
+      <ul id="listeSalon" class="list-group">
+        <!--<li class="list-group-item">
           <a href="salons/1"> n° 1 </a>
           <span class="badge float-xs-right">1 / 2 </span>
           -->
