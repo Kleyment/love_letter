@@ -160,7 +160,7 @@ function majSalon(listeSalon,partie) {
   document.getElementById(aName).innerHTML="Partie n°"+idpartie;
   document.getElementById(spanName).innerHTML=nbJoueursW+'/'+partie['nbjoueurs'];
 
-  for (let i=0;i<nbJoueursWaiting;i++) {
+  for (let i=0;i<nbJoueursW;i++) {
     var nameSpanJ="spanJ"+(i+1)+"IdPartie"+idpartie;
     var nameJoueur='nomj'+(i+1);
 

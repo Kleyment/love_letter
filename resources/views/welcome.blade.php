@@ -20,10 +20,10 @@
       </span>
     </form>
     <form class="forms" action="#" onsubmit="return annulerPseudo(this);">
-      <input id="cancelButton" type="submit" value="Annuler">
+      <input id="cancelButton" class="invisible" type="submit" value="Annuler">
     </form>
-    <h2 id="reason"><h2>
-    <div id="vueSalon">
+    <h2 id="reason" class="invisible"><h2>
+    <div id="vueSalon" class="invisible">
       <div class="page-header">
         <h2>Liste des parties</h2>
       </div>
