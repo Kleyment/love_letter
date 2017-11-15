@@ -25,6 +25,7 @@ function validerPseudo() {
   var url="/name/"+name;
   xhr.open("GET", url, true);
   xhr.send();
+  return false;
 }
 
 function annulerPseudo() {
@@ -32,6 +33,7 @@ function annulerPseudo() {
   var url="/cancelname/";
   xhr.open("GET", url, true);
   xhr.send();
+  return false;
 }
 
 function annulerPseudoOk() {
@@ -86,6 +88,7 @@ function effacerReason() {
   var reasonh2=document.getElementById("reason");
   reasonh2.innerHTML="";
   reasonh2.className="invisible";
+  reset();
 }
 
 function afficherSalon() {
@@ -93,26 +96,18 @@ function afficherSalon() {
   xhr.send();
 }
 
-//Si les parties 2, 3 et 5 sont dans le cache alors [ 2 => 0, 3 => 0, 5 => 0 ]
+//Si les parties 2, 3 et 5 sont dans le cache alors [ 'id2' => 0, 'id3' => 0, 'id5' => 0 ]
 //Après un add ou un maj les parties sont toujours visible sauf la 5 qui a été supprimé,
 //La partie 5 n'a pas eu d'add ou de maj pour la mettre à "1"
-//On a alors [ 2 => 1, 3 => 1, 5 => 0 ]
+//On a alors [ 'id2' => 1, 'id3' => 1, 'id5' => 0 ]
 //La partie 5 est donc supprimée
+//On remet à 0 les autres parties
 var partiesAffichées=[];
 function afficherSalonOk(response) {
   var listeSalon=document.getElementById("listeSalon");
 
-  /*for (var key in partiesAffichées) {
-    console.log("key " + key + " has value " + partiesAffichées[key]);
-  }*/
-
   for (let i=0;i<response['taille'];i++) {
     var idpartie=response[i]['idpartie'];
-
-    /*for (var key in partiesAffichées) {
-      console.log("key " + key + " has value " + partiesAffichées[key]);
-    }
-    console.log(partiesAffichées["idpartie"+idpartie]);*/
 
     if (partiesAffichées["id"+idpartie] == 0) {
       majSalon(listeSalon,response[i]);
@@ -127,18 +122,7 @@ function afficherSalonOk(response) {
     } else {
       partiesAffichées[key]=0;
     }
-    //console.log("key " + key + " has value " + partiesAffichées[key]);
   }
-
-  /*for (let i=0;i<response['taille'];i++) {
-    var idpartie=response[i]['idpartie'];
-    if (partiesAffichées[idpartie] == 0) {
-      alert("Suppression");
-
-    } else {
-      partiesAffichées[idpartie]=0;
-    }
-  }*/
 }
 
 function deleteSalon(idpartie) {
@@ -180,9 +164,9 @@ function addSalon(listeSalon,partie) {
 
   li.setAttribute("id","liIdPartie"+idpartie);
   li.className="list-group-item";
-  //TODO
+
   a.setAttribute("id","aIdPartie"+idpartie);
-  a.setAttribute("href","");
+  a.setAttribute("href",""); //TODO
   a.innerHTML="Partie n°"+idpartie;
 
   span.setAttribute("id","spanIdPartie"+idpartie);

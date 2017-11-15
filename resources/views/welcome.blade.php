@@ -13,16 +13,17 @@
   ?>
     <h1>Love Letter Inscription</h1>
     <h2>Choisissez un pseudo</h2>
-    <form class="forms" action="#" onsubmit="return validerPseudo(this);">
-      <span class="forms" >
+    <form class="forms" onsubmit="return validerPseudo();">
+      <span class="forms">
         <input id="name" type="text" placeholder="pseudo">
         <input id="okButton" type="submit" value="OK">
       </span>
     </form>
-    <form class="forms" action="#" onsubmit="return annulerPseudo(this);">
+    <form class="forms" onsubmit="return annulerPseudo();">
       <input id="cancelButton" class="invisible" type="submit" value="Annuler">
     </form>
     <h2 id="reason" class="invisible"><h2>
+    <br>
     <div id="vueSalon" class="invisible">
       <div class="page-header">
         <h2>Liste des parties</h2>
