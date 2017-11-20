@@ -36,5 +36,6 @@
         </li>
       </ul>
     </div>
+    <div id="creerPartie" class="invisible">+</div>
   </body>
 </html>

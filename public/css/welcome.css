@@ -111,6 +111,14 @@ input.invalid {
     border-radius: 10px;
 }
 
+#creerPartie {
+    color: #FFFFFF;
+    font-size: 50px;
+    border-radius: 50%;
+    background: linear-gradient(#d69c7b, #f2350c);
+    box-shadow: 2.5px 2.5px #000000;
+}
+
 .right {
     float: right;
 }

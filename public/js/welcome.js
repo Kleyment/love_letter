@@ -53,6 +53,7 @@ function validerPseudoOk() {
   document.getElementById("okButton").className="invisible";
   document.getElementById("cancelButton").className="";
   document.getElementById("vueSalon").className="";
+  document.getElementById("creerPartie").className="badge";
 }
 
 //Appelé si le nom est invalide, affiche une croix rouge sur le nom
@@ -70,6 +71,7 @@ function reset() {
   document.getElementById("cancelButton").className="invisible";
   document.getElementById("reason").className="invisible";
   document.getElementById("vueSalon").className="invisible";
+  document.getElementById("creerPartie").className="invisible";
 
   var okButton=document.getElementById("okButton");
   okButton.disabled=false;
