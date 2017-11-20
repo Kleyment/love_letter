@@ -144,12 +144,21 @@ function majSalon(listeSalon,partie) {
   document.getElementById(aName).innerHTML="Partie n°"+idpartie;
   document.getElementById(spanName).innerHTML=nbJoueursW+'/'+partie['nbjoueurs'];
 
-  for (let i=0;i<nbJoueursW;i++) {
+  for (let i=0;i<4;i++) {
+
     var nameSpanJ="spanJ"+(i+1)+"IdPartie"+idpartie;
     var nameJoueur='nomj'+(i+1);
 
     var spanJ=document.getElementById(nameSpanJ);
     spanJ.innerHTML=partie[nameJoueur];
+
+    //Si le nb de joueurs en attente est plus petit que le joueur en cours alors il est invisible
+    if (nbJoueursW < i+1) {
+      spanJ.className="badge left invisible";
+    } else {
+      spanJ.className="badge left";
+    }
+
   }
   partiesAffichées["id"+idpartie]=1;
 }
@@ -202,13 +211,19 @@ function nbJoueursWaiting(partie) {
   }
 }
 
+//nbj 4
+//id 0
+
 function createSpanPlayers(liElement,partie,nbJoueursWaiting) {
   var idpartie=partie['idpartie'];
-  for (let i=0;i<nbJoueursWaiting;i++) {
+  for (let i=0;i<4;i++) {
     var name='nomj'+(i+1);
     var span = document.createElement("span");
     span.setAttribute("id","spanJ"+(i+1)+"IdPartie"+idpartie);
     span.className="badge left";
+    if (nbJoueursWaiting < i+1) {
+      span.className=span.className+" invisible";
+    }
     span.innerHTML=partie[name];
     liElement.appendChild(span);
   }
