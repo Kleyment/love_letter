@@ -18,13 +18,13 @@ class Welcome extends Controller
           if ($utilisateur->aUnePartie()) {
             //TODO
           } else {
-            return view('welcome', ['validerPseudo' => true]);
+            return view('welcome');
           }
         } else {
-          return view('welcome', ['validerPseudo' => false]);
+          return view('welcome');
         }
       } else {
-        return view('welcome', ['validerPseudo' => false]);
+        return view('welcome');
       }
     }
 }

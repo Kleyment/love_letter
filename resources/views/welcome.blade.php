@@ -5,12 +5,7 @@
     <link rel="stylesheet" href="css/welcome.css">
     <script src="js/welcome.js"></script>
   </head>
-  <?php if ($validerPseudo) {
-    echo '<body onload="main(); validerPseudoOk()">';
-  } else {
-    echo '<body onload="main()">';
-  }
-  ?>
+  <body onload="main()">
     <h1>Love Letter Inscription</h1>
     <h2>Choisissez un pseudo</h2>
     <form class="forms" onsubmit="return validerPseudo();">
@@ -22,7 +17,7 @@
     <form class="forms" onsubmit="return annulerPseudo();">
       <input id="cancelButton" class="invisible" type="submit" value="Annuler">
     </form>
-    <h2 id="reason" class="invisible"><h2>
+    <h2 id="reason" class="invisible"></h2>
     <br>
     <div id="vueSalon" class="invisible">
       <div class="page-header">
@@ -32,10 +27,10 @@
         <!--<li class="list-group-item">
           <a href="salons/1"> n° 1 </a>
           <span class="badge float-xs-right">1 / 2 </span>
-          -->
-        </li>
+        </li>-->
       </ul>
     </div>
     <div id="creerPartie" class="invisible">+</div>
+    <input id="boutonNBJoueurs" class="invisible" type="number"></input>
   </body>
 </html>

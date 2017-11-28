@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Pour le 11 décembre
 use Controllers\ValiderPseudo;
 
 Route::get('/',"Welcome@welcome");

@@ -15,6 +15,10 @@ input.invalid {
   background: url(/css/form-error.png) 98% 50% no-repeat #fff1f2;
 }
 
+#name {
+  height: 2em;
+}
+
 #okButton {
     width: 5em;
     height: 2em;

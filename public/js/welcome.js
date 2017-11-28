@@ -20,7 +20,6 @@ function getCookie(cname) {
 
 //Envoie un requête xhr pour vérifier si le nom est valide
 function validerPseudo() {
-  reset();
   var name=document.getElementById("name").value;
   var url="/name/"+name;
   xhr.open("GET", url, true);
@@ -65,6 +64,7 @@ function validerPseudoKo(reason) {
 
 //Réinitialise les boutons bloqués et la croix rouge
 function reset() {
+  console.log("reset()");
   document.getElementById("name").disabled=false;
   document.getElementById("okButton").disabled=false;
   document.getElementById("name").className="";
@@ -83,15 +83,15 @@ function afficherReason(reason) {
   var reasonh2=document.getElementById("reason");
   reasonh2.innerHTML=reason;
   reasonh2.className="";
-  window.setTimeout(effacerReason, 3000);
+  setTimeout(effacerReason,1000);
 }
 
 function effacerReason() {
   var reasonh2=document.getElementById("reason");
   reasonh2.innerHTML="";
   reasonh2.className="invisible";
-  reset();
 }
+
 
 function afficherSalon() {
   xhr.open("GET", "/parties/", true);
@@ -99,9 +99,10 @@ function afficherSalon() {
 }
 
 //Si les parties 2, 3 et 5 sont dans le cache alors [ 'id2' => 0, 'id3' => 0, 'id5' => 0 ]
+//La partie 6 est ajouté [ 'id2' => 0, 'id3' => 0, 'id5' => 0, 'id6' => 1 ]
 //Après un add ou un maj les parties sont toujours visible sauf la 5 qui a été supprimé,
 //La partie 5 n'a pas eu d'add ou de maj pour la mettre à "1"
-//On a alors [ 'id2' => 1, 'id3' => 1, 'id5' => 0 ]
+//On a alors [ 'id2' => 1, 'id3' => 1, 'id5' => 0, 'id6' => 1 ]
 //La partie 5 est donc supprimée
 //On remet à 0 les autres parties
 var partiesAffichées=[];
@@ -237,7 +238,6 @@ function afficherSalonKo() {
 
 //Méthode automatiquement appelé au chargement de la page - Mise en place de l'AJAX
 function main() {
-  reset();
   xhr = new window.XMLHttpRequest();
   xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
@@ -268,5 +268,15 @@ function main() {
           }
       }
   };
+
+  var pseudo=getCookie("pseudo");
+  var token=getCookie("token");
+
+  if (pseudo && token && pseudo.length > 0 && token.length == 64) {
+    validerPseudo();
+  } else {
+    console.log("Main reset()");
+    reset();
+  }
   setInterval(afficherSalon, 1000);
 }

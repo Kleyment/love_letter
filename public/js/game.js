@@ -1,4 +1,6 @@
 var visible = [false,false,false,false,false,false,false,false,false,false];
+
+
 var Container = PIXI.Container;
 var AutoDetectRenderer = PIXI.autoDetectRenderer;
 var Loader = PIXI.loader;
@@ -60,6 +62,8 @@ function setup() {
     ntt[6]=textureCountess;
     ntt[7]=texturePrincess;
 
+
+    //Un for pour l'effet transparent au survol des cartes
     for (let i=0;i<spriteCards.length;i++) {
         spriteCards[i]=new Sprite(textureVerso);
         spriteCards[i].interactive = true;
@@ -80,6 +84,7 @@ function setup() {
 
     }
 
+    //TODO Mettre le truc au norme (la première carte est à gauche)
 
     spriteCards[0].x=921/2-127/2;
     spriteCards[0].y=679;
@@ -148,7 +153,8 @@ function setup() {
 
     state=play;
 
-    var tween = new TWEEN.Tween(spriteCards[3])
+    //TODO Mettre ça dans une fonction pour défausser
+    var tween = new TWEEN.Tween(spriteCards[4])
   	.to({ x: spriteCards[8].x, y: spriteCards[8].y, rotation: spriteCards[8].rotation }, 1000)
   	.onUpdate(function() {
   		console.log(this.x, this.y);
@@ -156,6 +162,7 @@ function setup() {
 	  .start();
     gameLoop();
 }
+
 
 //Player (1-4) Card (1-8 -> guard-princess 9->verso)
 function addCardToPlayer(player,card) {
