@@ -49,6 +49,8 @@ input.invalid {
   background: linear-gradient(#d69c7b, #f2350c);
 }
 
+
+
 #reason {
   margin: auto;
   width: 20%;
@@ -119,8 +121,27 @@ input.invalid {
     color: #FFFFFF;
     font-size: 50px;
     border-radius: 50%;
-    background: linear-gradient(#d69c7b, #f2350c);
+    background: linear-gradient(#ae8155, #f2350c);
     box-shadow: 2.5px 2.5px #000000;
+}
+
+#creerPartie:hover {
+  background: linear-gradient(#d69c7b, #f2350c);
+}
+
+ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+li input {
+    display:none;
+}
+ul:not(:focus) input:not(:checked), ul:not(:focus) input:not(:checked) + label {
+    display:none;
+}
+input:checked+label {
+    color:red;
 }
 
 .right {

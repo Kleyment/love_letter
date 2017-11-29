@@ -30,7 +30,24 @@
         </li>-->
       </ul>
     </div>
-    <div id="creerPartie" class="invisible">+</div>
-    <input id="boutonNBJoueurs" class="invisible" type="number"></input>
+    <div id="creerPartie" onclick="afficherNbJ();" class="invisible">+</div>
+    <ul id="listeNbJ" class="invisible" tabindex='0'>
+      <li>
+        <input id='2j' type='radio' name='item' checked='true' />
+        <label for='2j'>2 joueurs</label>
+      </li>
+      <li>
+        <input id='3j' type='radio' name='item' />
+        <label for='3j'>3 joueurs</label>
+      </li>
+      <li>
+        <input id='4j' type='radio' name='item' />
+        <label for='4j'>4 joueurs</label>
+      </li>
+
+    </ul>
+    <form onsubmit="return validerPartie();">
+      <input id="nbJButton" class="invisible" type="submit" value="Confirmer">
+    </form>
   </body>
 </html>

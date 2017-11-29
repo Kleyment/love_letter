@@ -72,6 +72,8 @@ function reset() {
   document.getElementById("reason").className="invisible";
   document.getElementById("vueSalon").className="invisible";
   document.getElementById("creerPartie").className="invisible";
+  document.getElementById("listeNbJ").className="invisible";
+  document.getElementById("nbJButton").className="invisible";
 
   var okButton=document.getElementById("okButton");
   okButton.disabled=false;
@@ -178,7 +180,7 @@ function addSalon(listeSalon,partie) {
   li.className="list-group-item";
 
   a.setAttribute("id","aIdPartie"+idpartie);
-  a.setAttribute("href",""); //TODO
+  a.setAttribute("href","/rejoindrePartie/"+idpartie);
   a.innerHTML="Partie n°"+idpartie;
 
   span.setAttribute("id","spanIdPartie"+idpartie);
@@ -234,6 +236,25 @@ function createSpanPlayers(liElement,partie,nbJoueursWaiting) {
 
 function afficherSalonKo() {
   console.log("Erreur lors de l'affichage des salons");
+}
+
+function afficherNbJ() {
+  document.getElementById("listeNbJ").className="";
+  document.getElementById("nbJButton").className="";
+}
+
+function validerPartie() {
+  var choicename="";
+  var button="";
+  for (let i=2;i<=4;i++) {
+    choicename=i+"j";
+    if (document.getElementById(choicename).checked) {
+      console.log("YOLO");
+      window.location.assign("/creerPartie/"+i);
+      return false;
+    }
+  }
+  return false;
 }
 
 //Méthode automatiquement appelé au chargement de la page - Mise en place de l'AJAX
