@@ -24,9 +24,13 @@ Route::get('/cancelname/',"ValiderPseudo@annulerPseudo");
 
 Route::get('/creerPartie/{nbjoueurs}',"ControlleurParties@creerPartie");
 Route::get('/rejoindrePartie/{idpartie}',"ControlleurParties@rejoindrePartie");
+
+//Utilisé par l'AJAX de welcome.js pour avoir périodiquement les parties
 Route::get('/parties',"ControlleurParties@toutesLesParties");
 
-
+Route::get('/partie/{idpartie}', function() {
+  return view('play');
+});
 
 //Route::get('/update',)
 //Ici une rediraction vers un controlleur qui renvoie un objet Etat (en json)

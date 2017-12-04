@@ -16,7 +16,8 @@ class Welcome extends Controller
         $utilisateur=Utilisateur::getUtilisateurFromPseudoToken($pseudo,$token);
         if ($utilisateur) {
           if ($utilisateur->aUnePartie()) {
-            //TODO
+            //TODO Ajouter des paramètres
+            return view('play');
           } else {
             return view('welcome');
           }

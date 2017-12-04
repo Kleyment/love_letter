@@ -28,12 +28,17 @@ class ControlleurParties extends Controller {
       if ($utilisateur && !($utilisateur->aUnePartie())) {
         $idpartie=Partie::creerPartie($pseudo,$nbjoueurs);
         $utilisateur->assignerAUnePartie($idpartie);
+        header('Location: /partie/'.$idpartie);
+        exit();
       } else {
-        //TODO retourner du JSON
-        return "";
+        //Vous n'êtes plus connecté ou alors vous êtes déjà dans une partie
+        //Vue par defaut
+        return view('welcome');
       }
     } else {
-      return "";
+      //Vous n'êtes plus connecté
+      //Vue par défaut
+      return view('welcome');
     }
   }
 
@@ -48,17 +53,27 @@ class ControlleurParties extends Controller {
           $ok=$partie->rejoindrePartie($pseudo);
           if ($ok) {
             $utilisateur->assignerAUnePartie($idpartie);
+            header('Location: /partie/'.$idpartie);
+            exit();
           } else {
-            return "";
+            //Vous ne pouvez pas rejoindre cette partie
+            //Vue partie
+            return view('welcome');
           }
         } else {
-          return "";
+          //La partie n'existe plus
+          //Vue partie
+          return view('welcome');
         }
       } else {
-        return "";
+        //Vous n'êtes pas connecté mais vous avez déjà une partie
+        //Vue par défaut
+        return view('welcome');
       }
     } else {
-      return "";
+      //Vous n'êtes pas connecté mais vous avez déjà une partie
+      //Vue par défaut
+      return view('welcome');
     }
   }
 }

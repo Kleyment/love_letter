@@ -24,6 +24,9 @@ var spriteCards=new Array(10);
 //9 : stack
 
 
+//Variable nécessaire pour l'AJAX
+var xhr;
+
 
 var ntt=new Array(8);
 

@@ -2,8 +2,8 @@
   <head>
     <title>Inscription</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/welcome.css">
-    <script src="js/welcome.js"></script>
+    <link rel="stylesheet" href="/css/welcome.css">
+    <script src="/js/welcome.js"></script>
   </head>
   <body onload="main()">
     <h1>Love Letter Inscription</h1>
@@ -44,7 +44,6 @@
         <input id='4j' type='radio' name='item' />
         <label for='4j'>4 joueurs</label>
       </li>
-
     </ul>
     <form onsubmit="return validerPartie();">
       <input id="nbJButton" class="invisible" type="submit" value="Confirmer">
