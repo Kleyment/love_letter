@@ -28,7 +28,7 @@ class ControlleurParties extends Controller {
       if ($utilisateur && !($utilisateur->aUnePartie())) {
         $idpartie=Partie::creerPartie($pseudo,$nbjoueurs);
         $utilisateur->assignerAUnePartie($idpartie);
-        header('Location: /partie/'.$idpartie);
+        header('Location: /partie/'.$idpartie.'/',true,302);
         exit();
       } else {
         //Vous n'êtes plus connecté ou alors vous êtes déjà dans une partie
@@ -53,7 +53,7 @@ class ControlleurParties extends Controller {
           $ok=$partie->rejoindrePartie($pseudo);
           if ($ok) {
             $utilisateur->assignerAUnePartie($idpartie);
-            header('Location: /partie/'.$idpartie);
+            header('Location: /partie/'.$idpartie.'/',true,302);
             exit();
           } else {
             //Vous ne pouvez pas rejoindre cette partie

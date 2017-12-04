@@ -7,6 +7,6 @@
   </head>
   <body>
     <script src="/js/game.js"></script>
-    <script>alert("YOLO");</script>
+    <!--<script>alert("YOLO");</script>-->
   </body>
 </html>

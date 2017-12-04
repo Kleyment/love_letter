@@ -21,7 +21,9 @@ class Partie extends Model
     //Dès qu'un utilisateur créé une partie, il la rejoint
     public static function creerPartie($pseudo,$nbjoueurs) {
       $partie=Partie::create(['nomj1' => $pseudo, 'nbjoueurs' => $nbjoueurs]);
-      return $partie->idpartie;
+      $idpartie=$partie->idpartie;
+      Pioche::initialiserPioche($idpartie);
+      return $idpartie;
     }
 
     public static function getPartie($idpartie) {

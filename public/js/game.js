@@ -31,11 +31,12 @@ var xhr;
 var ntt=new Array(8);
 
 Loader
-    .add("js/assets/background.jpg")
-    .add("js/assets/cardnumbers.json")
-    .add("js/assets/cards.json")
+    .add("/js/assets/background.jpg")
+    .add("/js/assets/cardnumbers.json")
+    .add("/js/assets/cards.json")
     .on("progress",progress)
     .load(setup);
+
 
 function progress(loader, resource) {
     console.log("loading: " + resource.url);
@@ -43,7 +44,7 @@ function progress(loader, resource) {
 }
 
 function setup() {
-    var textureBackground=TextureCache["js/assets/background.jpg"];
+    var textureBackground=TextureCache["/js/assets/background.jpg"];
 
     var textureGuard=TextureCache["guard.png"];
     var texturePriest=TextureCache["priest.png"];

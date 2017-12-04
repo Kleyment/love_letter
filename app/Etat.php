@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Etat extends Model
 {
     public $timestamps = false;
+
+    
 }
