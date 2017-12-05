@@ -19,6 +19,10 @@ class CreatePartiesTable extends Migration
             $table->string('nomj2');
             $table->string('nomj3');
             $table->string('nomj4');
+            $table->integer('idj1');
+            $table->integer('idj2');
+            $table->integer('idj3');
+            $table->integer('idj4');
             $table->integer('nbjoueurs');
         });
     }

@@ -42,6 +42,25 @@ class Pioche extends Model
       }
     }
 
+    public static function tirerCarte($idpartie,$idjoueur) {
+      $carte=Pioche::where('idpartie', $idpartie)->where('position', 1)->get()->first();
+      $typecarte=$carte->typecarte;
+
+      //Suppression de la carte de la Pioche
+      $carte->delete();
+
+      //Décalage de toutes les positions
+      $size=Pioche::where('idpartie',$idpartie)->get()->count();
+      for($i=0;$i<$size;$i++){
+        $carte=Pioche::where('idpartie',$idpartie)->get()[$i];
+        $carte->position=$carte->position-1;
+        $carte->save();
+      }
+
+      //On ajoute la carte à la main du joueur
+      Main::tirerCarte($idpartie,$idjoueur,$typecarte);
+    }
+
 
 
 }
