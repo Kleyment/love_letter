@@ -32,6 +32,8 @@ Route::get('/partie/{idpartie}', function() {
   return view('play');
 });
 
+Route::get('/partie/{idpartie}/update', 'ControlleurEtats@etatPartie');
+
 //Route::get('/update',)
 //Ici une rediraction vers un controlleur qui renvoie un objet Etat (en json)
 //avec un filtre des cartes selon le joueur

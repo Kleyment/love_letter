@@ -48,4 +48,15 @@ class Main extends Model
         $main->save();
       }
     }
+
+    public static function defausserCarte($idpartie,$idjoueur,$typecarte) {
+      $main=Main::where('idpartie',$idpartie)->where('idjoueur',$idjoueur)->get()->first();
+      if ($main->carteg == $typecarte) {
+        $main->carteg=$main->carted;
+        $main->carted=-1;
+      } else if ($main->carted == $typecarte) {
+        $main->carted=-1;
+      }
+      $main->save();
+    }
 }

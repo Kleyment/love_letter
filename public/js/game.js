@@ -1,5 +1,5 @@
 var visible = [false,false,false,false,false,false,false,false,false,false];
-
+var xhr;
 
 var Container = PIXI.Container;
 var AutoDetectRenderer = PIXI.autoDetectRenderer;
@@ -238,6 +238,10 @@ function play(ms) {
       }*/
 }
 
+function chargerEtat() {
+
+}
+
 
 // Converts from degrees to radians.
 Math.radians = function(degrees) {
@@ -248,3 +252,23 @@ Math.radians = function(degrees) {
 Math.degrees = function(radians) {
     return radians * 180 / Math.PI;
 };
+
+function main() {
+  xhr = new window.XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+              var response=JSON.parse(xhr.responseText);
+              switch (response["type"]) {
+                //Cas 1 Envoi d'un etat
+                case 1:
+                  chargerEtat(response);
+                  break;
+                //Cas 2
+                case 2:
+                //???
+              }
+              //previousresponse=xhr.responseText;
+          }
+      }
+  };

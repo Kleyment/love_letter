@@ -1,0 +1,11 @@
+@font-face {
+ font-family:FontAwesome;
+ src:url(/packs/fontawesome-webfont-674f50d287a8c48dc19ba404d20fe713.eot);
+ src:url(/packs/fontawesome-webfont-674f50d287a8c48dc19ba404d20fe713.eot?#iefix&v=4.7.0) format("embedded-opentype"),url(/packs/fontawesome-webfont-af7ae505a9eed503f8b8e6982036873e.woff2) format("woff2"),url(/packs/fontawesome-webfont-fee66e712a8a08eef5805a46892932ad.woff) format("woff"),url(/packs/fontawesome-webfont-b06871f281fee6b241d60582ae9369b9.ttf) format("truetype"),url(/packs/fontawesome-webfont-912ec66d7572ff821749319396470bde.svg#fontawesomeregular) format("svg");
+ font-weight:400;
+ font-style:normal
+}
+
+.fa-sign-out:before {
+ content:"\F08B"
+}

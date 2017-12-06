@@ -42,6 +42,7 @@ class Pioche extends Model
       }
     }
 
+    //Au début faire tirerCarte($id,-1)
     public static function tirerCarte($idpartie,$idjoueur) {
       $carte=Pioche::where('idpartie', $idpartie)->where('position', 1)->get()->first();
       $typecarte=$carte->typecarte;
@@ -57,8 +58,13 @@ class Pioche extends Model
         $carte->save();
       }
 
-      //On ajoute la carte à la main du joueur
-      Main::tirerCarte($idpartie,$idjoueur,$typecarte);
+      //Si l'idjoueur n'est pas spécifié la carte va directement dans la défausse
+      if ($idjoueur == -1) {
+        Defausse::defausserCarte($idpartie,$typecarte,-1);
+      } else {
+        //On ajoute la carte à la main du joueur
+        Main::tirerCarte($idpartie,$idjoueur,$typecarte);
+      }
     }
 
 

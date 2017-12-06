@@ -23,8 +23,12 @@ class Partie extends Model
       $idj1=Utilisateur::getUtilisateurFromPseudo($pseudo)->id;
       $partie=Partie::create(['nomj1' => $pseudo, 'nbjoueurs' => $nbjoueurs, 'idj1' => $idj1]);
       $idpartie=$partie->idpartie;
-      Pioche::initialiserPioche($idpartie);
-      Main::initialiserMains($idpartie,$nbjoueurs);
+
+      //A utilisaer quand la partie est lancée
+      //Pioche::initialiserPioche($idpartie);
+
+
+      //Main::initialiserMains($idpartie,$nbjoueurs);
       //Pioche::tirerCarte($idpartie,$idj1);
       return $idpartie;
     }
