@@ -169,26 +169,46 @@ function setup() {
 
 
 //Player (1-4) Card (1-8 -> guard-princess 9->verso)
-function addCardToPlayer(player,card) {
-    console.log("addCardToPlayer : (player : "+player+") (card : "+card+")");
+function addCardToPlayer(player,card,first) {
+    console.log("addCardToPlayer : (player : "+player+") (card : "+card+") (first : "+first+")");
     switch (player) {
     default:
     case 1:
-        spriteCards[1].texture=numberToTexture(card);
-        setVisible(1,true);
+        if (first) {
+          spriteCards[0].texture=numberToTexture(card);
+          setVisible(0,true);
+        } else {
+          spriteCards[1].texture=numberToTexture(card);
+          setVisible(1,true);
+        }
         break;
     case 2:
+      if (first) {
+        spriteCards[2].texture=numberToTexture(card);
+        setVisible(2,true);
+      } else {
         spriteCards[3].texture=numberToTexture(card);
         setVisible(3,true);
-        break;
+      }
+      break;
     case 3:
+      if (first) {
+        spriteCards[4].texture=numberToTexture(card);
+        setVisible(4,true);
+      } else {
         spriteCards[5].texture=numberToTexture(card);
         setVisible(5,true);
-        break;
+      }
+      break;
     case 4:
+      if (first) {
+        spriteCards[6].texture=numberToTexture(card);
+        setVisible(6,true);
+      } else {
         spriteCards[7].texture=numberToTexture(card);
         setVisible(7,true);
-        break;
+      }
+      break;
     }
 }
 
@@ -207,7 +227,12 @@ function setVisible(numcard,visibility) {
     } else {
         spriteCards[numcard].alpha=0;
     }
+}
 
+function allInvisible() {
+  for (let i=0;i<8;i++) {
+    setVisible(i,false);
+  }
 }
 
 //numcard : 0-9
@@ -238,10 +263,33 @@ function play(ms) {
       }*/
 }
 
-function chargerEtat() {
-
+function chargerEtat(reponse) {
+  allInvisible();
+  if (reponse['carteg1'] != -1) {
+    addCardToPlayer(1,reponse['carteg1'],true);
+  }
+  if (reponse['carted1'] != -1) {
+    addCardToPlayer(1,reponse['carted1'],false);
+  }
+  if (reponse['carteg2'] != -1) {
+    addCardToPlayer(2,reponse['carteg2'],true);
+  }
+  if (reponse['carted2'] != -1) {
+    addCardToPlayer(2,reponse['carted2'],false);
+  }
+  if (reponse['carteg3'] != -1) {
+    addCardToPlayer(3,reponse['carteg3'],true);
+  }
+  if (reponse['carted3'] != -1) {
+    addCardToPlayer(3,reponse['carted3'],false);
+  }
+  if (reponse['carteg4'] != -1) {
+    addCardToPlayer(4,reponse['carteg4'],true);
+  }
+  if (reponse['carted4'] != -1) {
+    addCardToPlayer(4,reponse['carted4'],false);
+  }
 }
-
 
 // Converts from degrees to radians.
 Math.radians = function(degrees) {
@@ -252,6 +300,11 @@ Math.radians = function(degrees) {
 Math.degrees = function(radians) {
     return radians * 180 / Math.PI;
 };
+
+function update() {
+  xhr.open("GET", "update", true);
+  xhr.send();
+}
 
 function main() {
   xhr = new window.XMLHttpRequest();
@@ -272,3 +325,5 @@ function main() {
           }
       }
   };
+  setInterval(update, 10000);
+}

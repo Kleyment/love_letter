@@ -5,7 +5,7 @@
     <script src="/js/pixi.js"></script>
     <script src="/js/Tween.js"></script>
   </head>
-  <body>
+  <body onload="main()">
     <script src="/js/game.js"></script>
     <!--<script>alert("YOLO");</script>-->
   </body>
