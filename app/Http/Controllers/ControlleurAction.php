@@ -21,10 +21,12 @@ class ControlleurAction extends Controller {
         if ($partie->idj1 == $utilisateur->id) {
           if (Tour::quiPeutPiocher($idpartie) == 1) {
             Pioche::tirerCarte($idpartie,$utilisateur->id);
+            Tour::create(['idpartie' => $idpartie, 'nbtour' => Tour::nouveauTour($idpartie), 'idjoueur' => $utilisateur->id, 'typeaction' => 1, 'idvictime' => -1, 'typecarte' => -1]);
           }
-        } else if ($partie->idj1 == $utilisateur->id) {
+        } else if ($partie->idj2 == $utilisateur->id) {
           if (Tour::quiPeutPiocher($idpartie) == 2) {
             Pioche::tirerCarte($idpartie,$utilisateur->id);
+            Tour::create(['idpartie' => $idpartie, 'nbtour' => Tour::nouveauTour($idpartie), 'idjoueur' => $utilisateur->id, 'typeaction' => 1, 'idvictime' => -1, 'typecarte' => -1]);
           }
         }
       }
@@ -42,12 +44,14 @@ class ControlleurAction extends Controller {
             $main=Main::getMain($idpartie,$utilisateur->id);
             $typecarte=$main->retournerCarte($idcarte);
             Defausse::defausserCarte($idpartie,$typecarte,$utilisateur->id);
+            Tour::create(['idpartie' => $idpartie, 'nbtour' => Tour::nouveauTour($idpartie), 'idjoueur' => $utilisateur->id, 'typeaction' => 2, 'idvictime' => -1, 'typecarte' => -1]);
           }
-        } else if ($partie->idj1 == $utilisateur->id) {
+        } else if ($partie->idj2 == $utilisateur->id) {
           if (Tour::quiPeutDefausser($idpartie) == 2) {
             $main=Main::getMain($idpartie,$utilisateur->id);
             $typecarte=$main->retournerCarte($idcarte);
             Defausse::defausserCarte($idpartie,$typecarte,$utilisateur->id);
+            Tour::create(['idpartie' => $idpartie, 'nbtour' => Tour::nouveauTour($idpartie), 'idjoueur' => $utilisateur->id, 'typeaction' => 2, 'idvictime' => -1, 'typecarte' => -1]);
           }
         }
     }
