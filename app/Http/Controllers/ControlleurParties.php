@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Utilisateur;
 use App\Partie;
+use App\Pioche;
+use App\Main;
 
 class ControlleurParties extends Controller {
 
@@ -53,6 +55,12 @@ class ControlleurParties extends Controller {
           $ok=$partie->rejoindrePartie($pseudo);
           if ($ok) {
             $utilisateur->assignerAUnePartie($idpartie);
+            if ($partie->isPartiePleine()) {
+              //A utiliser quand la partie est lancée
+              Pioche::initialiserPioche($partie->idpartie);
+              Main::initialiserMains($partie->idpartie,$partie->nbjoueurs);
+              //Pioche::tirerCarte($idpartie,$idj1);
+            }
             header('Location: /partie/'.$idpartie.'/',true,302);
             exit();
           } else {
@@ -65,6 +73,9 @@ class ControlleurParties extends Controller {
           //Vue partie
           return view('welcome');
         }
+      } else if ($utilisateur && ($utilisateur->idpartie == $idpartie)) {
+        header('Location: /partie/'.$idpartie.'/',true,302);
+        exit();
       } else {
         //Vous n'êtes pas connecté mais vous avez déjà une partie
         //Vue par défaut

@@ -16,6 +16,10 @@ class Main extends Model
         'idpartie', 'idjoueur', 'carteg', 'carted'
     ];
 
+    public static function getMain($idpartie, $idjoueur) {
+      return Main::where('idpartie',$idpartie)->where('idjoueur',$idjoueur)->get()->first();
+    }
+
     public static function initialiserMains($idpartie,$nbjoueurs) {
       $idj1=Partie::getPartie($idpartie)->idj1;
       $idj2=Partie::getPartie($idpartie)->idj2;

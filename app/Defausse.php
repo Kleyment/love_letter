@@ -30,4 +30,18 @@ class Defausse extends Model
         Main::defausserCarte($idpartie,$idjoueur,$typecarte);
       }
     }
+
+    public static function nbDefausse($idpartie) {
+      return Defausse::where('idpartie',$idpartie)->get()->count();
+    }
+
+    public static function cardOntTheTop($idpartie) {
+      if (Defausse::nbDefausse($idpartie) > 0) {
+        Defausse::where('idpartie',$idpartie)->where('position',1)->get()->first()->typecarte;
+      } else {
+        return -1;
+      }
+    }
+
+
 }

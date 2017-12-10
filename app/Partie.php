@@ -24,12 +24,6 @@ class Partie extends Model
       $partie=Partie::create(['nomj1' => $pseudo, 'nbjoueurs' => $nbjoueurs, 'idj1' => $idj1]);
       $idpartie=$partie->idpartie;
 
-      //A utilisaer quand la partie est lancée
-      //Pioche::initialiserPioche($idpartie);
-
-
-      //Main::initialiserMains($idpartie,$nbjoueurs);
-      //Pioche::tirerCarte($idpartie,$idj1);
       return $idpartie;
     }
 
@@ -39,6 +33,16 @@ class Partie extends Model
 
     public static function toutesLesParties() {
       return Partie::all();
+    }
+
+    public function isPartiePleine() {
+      if (($this->nbjoueurs == 2) && ($this->idj1 != -1) && ($this->idj2 != -1)) {
+        return true;
+      } else if (($this->nbjoueurs == 3) && ($this->idj1 != -1) && ($this->idj2 != -1) && ($this->idj3 != -1)) {
+        return true;
+      } else if (($this->nbjoueurs == 4) && ($this->idj1 != -1) && ($this->idj2 != -1) && ($this->idj3 != -1) && ($this->idj4 != -1)) {
+        return true;
+      }
     }
 
     public function rejoindrePartie($pseudo) {

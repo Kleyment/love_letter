@@ -65,7 +65,7 @@ function setup() {
     ntt[5]=textureKing;
     ntt[6]=textureCountess;
     ntt[7]=texturePrincess;
-
+    ntt[8]=textureVerso;
 
     //Un for pour l'effet transparent au survol des cartes
     for (let i=0;i<spriteCards.length;i++) {
@@ -140,7 +140,7 @@ function setup() {
     }
     stage.addChild(mainScene);
 
-    setVisible(0,true);
+    /*setVisible(0,true);
     setVisible(1,true);
 
     setVisible(2,true);
@@ -153,20 +153,31 @@ function setup() {
     setVisible(7,true);
 
     setVisible(8,true);
-    setVisible(9,true);
+    setVisible(9,true);*/
 
     state=play;
 
     //TODO Mettre ça dans une fonction pour défausser
-    var tween = new TWEEN.Tween(spriteCards[4])
+    /*var tween = new TWEEN.Tween(spriteCards[4])
   	.to({ x: spriteCards[8].x, y: spriteCards[8].y, rotation: spriteCards[8].rotation }, 1000)
   	.onUpdate(function() {
   		console.log(this.x, this.y);
   	})
-	  .start();
+	  .start();*/
     gameLoop();
 }
 
+//True defausse / False pioche
+function addCardSpecial(card,boolean) {
+  if (boolean) {
+    spriteCards[8].texture=numberToTexture(card);
+    setVisible(8,true);
+  } else {
+    spriteCards[9].texture=numberToTexture(card);
+    setVisible(9,true);
+  }
+
+}
 
 //Player (1-4) Card (1-8 -> guard-princess 9->verso)
 function addCardToPlayer(player,card,first) {
@@ -230,7 +241,7 @@ function setVisible(numcard,visibility) {
 }
 
 function allInvisible() {
-  for (let i=0;i<8;i++) {
+  for (let i=0;i<10;i++) {
     setVisible(i,false);
   }
 }
@@ -263,32 +274,43 @@ function play(ms) {
       }*/
 }
 
-function chargerEtat(reponse) {
+function chargerEtat(response) {
   allInvisible();
-  if (reponse['carteg1'] != -1) {
-    addCardToPlayer(1,reponse['carteg1'],true);
+
+  if (response['carteg1'] != -1) {
+    addCardToPlayer(1,response['carteg1'],true);
   }
-  if (reponse['carted1'] != -1) {
-    addCardToPlayer(1,reponse['carted1'],false);
+  if (response['carted1'] != -1) {
+    addCardToPlayer(1,response['carted1'],false);
   }
-  if (reponse['carteg2'] != -1) {
-    addCardToPlayer(2,reponse['carteg2'],true);
+  if (response['carteg2'] != -1) {
+    addCardToPlayer(2,response['carteg2'],true);
   }
-  if (reponse['carted2'] != -1) {
-    addCardToPlayer(2,reponse['carted2'],false);
+  if (response['carted2'] != -1) {
+    addCardToPlayer(2,response['carted2'],false);
   }
-  if (reponse['carteg3'] != -1) {
-    addCardToPlayer(3,reponse['carteg3'],true);
+  if (response['carteg3'] != -1) {
+    addCardToPlayer(3,response['carteg3'],true);
   }
-  if (reponse['carted3'] != -1) {
-    addCardToPlayer(3,reponse['carted3'],false);
+  if (response['carted3'] != -1) {
+    addCardToPlayer(3,response['carted3'],false);
   }
-  if (reponse['carteg4'] != -1) {
-    addCardToPlayer(4,reponse['carteg4'],true);
+  if (response['carteg4'] != -1) {
+    addCardToPlayer(4,response['carteg4'],true);
   }
-  if (reponse['carted4'] != -1) {
-    addCardToPlayer(4,reponse['carted4'],false);
+  if (response['carted4'] != -1) {
+    addCardToPlayer(4,response['carted4'],false);
   }
+
+  if ((response['defausse'] != -1) & (response['nbdefausse'] > 0)) {
+    addCardSpecial(response['defausse'],true);
+  }
+
+  if (response['nbpioche'] > 0) {
+    addCardSpecial(9,false);
+  }
+
+
 }
 
 // Converts from degrees to radians.
@@ -325,5 +347,5 @@ function main() {
           }
       }
   };
-  setInterval(update, 10000);
+  setInterval(update, 1000);
 }

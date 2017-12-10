@@ -67,6 +67,10 @@ class Pioche extends Model
       }
     }
 
+    public static function nbPioche($idpartie) {
+      return Pioche::where('idpartie',$idpartie)->get()->count();
+    }
+
 
 
 }
