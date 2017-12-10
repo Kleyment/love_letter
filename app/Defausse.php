@@ -37,7 +37,7 @@ class Defausse extends Model
 
     public static function cardOntTheTop($idpartie) {
       if (Defausse::nbDefausse($idpartie) > 0) {
-        Defausse::where('idpartie',$idpartie)->where('position',1)->get()->first()->typecarte;
+        return Defausse::where('idpartie',$idpartie)->where('position',1)->get()->first()->typecarte;
       } else {
         return -1;
       }

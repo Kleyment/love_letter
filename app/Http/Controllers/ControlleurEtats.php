@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Utilisateur;
 use App\Etat;
 use App\Main;
 use App\Partie;
@@ -28,20 +29,52 @@ class ControlleurEtats extends Controller
     $nbdefausse=Defausse::nbDefausse($idpartie);
 
     $etat['idpartie']=$idpartie;
-    if ($mainj1) {
-      $etat['carteg1']=$mainj1->carteg;
-      $etat['carted1']=$mainj1->carted;
-    } else {
-      $etat['carteg1']=-1;
-      $etat['carted1']=-1;
-    }
 
-    if ($mainj2) {
-      $etat['carteg2']=$mainj2->carteg;
-      $etat['carted2']=$mainj2->carted;
-    } else {
-      $etat['carteg2']=-1;
-      $etat['carted2']=-1;
+      if ($mainj1 && $mainj1->carteg != -1) {
+        $etat['carteg1']=9;
+      } else {
+        $etat['carteg1']=-1;
+      }
+
+      if ($mainj1 && $mainj1->carted != -1) {
+        $etat['carted1']=9;
+      } else {
+        $etat['carted1']=-1;
+      }
+
+      if ($mainj2 && $mainj2->carteg != -1) {
+        $etat['carteg2']=9;
+      } else {
+        $etat['carteg2']=-1;
+      }
+
+      if ($mainj2 && $mainj2->carted != -1) {
+        $etat['carted2']=9;
+      } else {
+        $etat['carted2']=-1;
+      }
+
+      if (isset($_COOKIE['pseudo']) && isset($_COOKIE['token'])) {
+        $pseudo=$_COOKIE['pseudo'];
+        $token=$_COOKIE['token'];
+        $utilisateur=Utilisateur::getUtilisateurFromPseudoToken($pseudo,$token);
+        $idutilisateur=$utilisateur->id;
+
+      if ($mainj1 && $mainj1->idjoueur == $idutilisateur) {
+        if ($etat['carteg1'] != -1) {
+          $etat['carteg1']=$mainj1->carteg;
+        }
+        if ($etat['carted1'] != -1) {
+          $etat['carted1']=$mainj1->carted;
+        }
+      } else if ($mainj2 && $mainj2->idjoueur == $idutilisateur) {
+        if ($etat['carteg2'] != -1) {
+          $etat['carteg2']=$mainj2->carteg;
+        }
+        if ($etat['carted2'] != -1) {
+          $etat['carted2']=$mainj2->carted;
+        }
+      }
     }
 
     $etat['carted3']=-1;

@@ -86,6 +86,20 @@ function setup() {
             }
         })
 
+        if (i < 8) {
+          spriteCards[i].on("click", function(e){
+              xhr.open("GET", "action/defausser/"+i, true);
+              xhr.send();
+          })
+        }
+
+        if (i == 9) {
+          spriteCards[i].on("click", function(e){
+              xhr.open("GET", "action/piocher", true);
+              xhr.send();
+          })
+        }
+
     }
 
     //TODO Mettre le truc au norme (la première carte est à gauche)

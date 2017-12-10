@@ -20,6 +20,7 @@ class Main extends Model
       return Main::where('idpartie',$idpartie)->where('idjoueur',$idjoueur)->get()->first();
     }
 
+
     public static function initialiserMains($idpartie,$nbjoueurs) {
       $idj1=Partie::getPartie($idpartie)->idj1;
       $idj2=Partie::getPartie($idpartie)->idj2;
@@ -62,5 +63,16 @@ class Main extends Model
         $main->carted=-1;
       }
       $main->save();
+    }
+
+    public function retournerCarte($idcarte) {
+      $idcarte=$idcarte%2;
+
+      if ($idcarte == 0) {
+        return $this->carteg;
+      } else {
+        return $this->carted;
+      }
+
     }
 }
