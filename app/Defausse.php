@@ -28,6 +28,15 @@ class Defausse extends Model
       //Si l'idjoueur n'est pas spécifié la carte va directement dans la défausse
       if ($idjoueur != -1) {
         Main::defausserCarte($idpartie,$idjoueur,$typecarte);
+        Defausse::appliquerEffet($idpartie,$idjoueur,$typecarte);
+      }
+    }
+
+    public static function appliquerEffet($idpartie,$idjoueur,$typecarte) {
+      //Roi 6
+      if ($typecarte == 6) {
+        $partie=Partie::getPartie($idpartie);
+        $partie->echangerMain($partie->idj1,$partie->idj2);
       }
     }
 

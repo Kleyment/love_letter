@@ -35,6 +35,22 @@ class Partie extends Model
       return Partie::all();
     }
 
+    public function echangerMain($idj1,$idj2) {
+        $main1=Main::getMain($this->idpartie,$idj1);
+        $main2=Main::getMain($this->idpartie,$idj2);
+
+        $cartetemp=$main1->carteg;
+        $main1->carteg=$main2->carteg;
+        $main2->carteg=$cartetemp;
+
+        $cartetemp=$main1->carted;
+        $main1->carted=$main2->carted;
+        $main2->carted=$cartetemp;
+
+        $main1->save();
+        $main2->save();
+    }
+
     public function isPartiePleine() {
       if (($this->nbjoueurs == 2) && ($this->idj1 != -1) && ($this->idj2 != -1)) {
         return true;

@@ -368,6 +368,7 @@ function main() {
                   if (texte) {
                     afficherTexte(texte);
                   }
+
               }
               //previousresponse=xhr.responseText;
           }
