@@ -22,6 +22,17 @@ class Tour extends Model {
       }
     }
 
+    public static function quiPeutFaireQuoi($idpartie) {
+      $idpiocheur=self::quiPeutPiocher($idpartie);
+      if ($idpiocheur != -1) {
+        return "C'est au joueur ".$idpiocheur." de piocher";
+      }
+      $iddefausseur=self::quiPeutDefausser($idpartie);
+      if ($iddefausseur != -1) {
+        return "C'est au joueur ".$iddefausseur." de défausser";
+      }
+    }
+
     //typeaction 1 piocher / 2 défausser
 
     public static function quiPeutPiocher($idpartie) {

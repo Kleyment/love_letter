@@ -299,5 +299,5 @@ function main() {
     console.log("Main reset()");
     reset();
   }
-  setInterval(afficherSalon, 1000);
+  setInterval(afficherSalon, 3000);
 }

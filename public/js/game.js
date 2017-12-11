@@ -337,6 +337,15 @@ Math.degrees = function(radians) {
     return radians * 180 / Math.PI;
 };
 
+function afficherTexte(texte) {
+  document.getElementById("text").innerHTML=texte;
+  setTimeout(effacerTexte,3000);
+}
+
+function effacerTexte() {
+  document.getElementById("text").innerHTML="";
+}
+
 function update() {
   xhr.open("GET", "update", true);
   xhr.send();
@@ -353,9 +362,12 @@ function main() {
                 case 1:
                   chargerEtat(response);
                   break;
-                //Cas 2
+                //Cas 2 Message d'erreur
                 case 2:
-                //???
+                  var texte=response["text"];
+                  if (texte) {
+                    afficherTexte(texte);
+                  }
               }
               //previousresponse=xhr.responseText;
           }

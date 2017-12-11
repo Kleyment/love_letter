@@ -59,7 +59,8 @@ class ControlleurParties extends Controller {
               //A utiliser quand la partie est lancée
               Pioche::initialiserPioche($partie->idpartie);
               Main::initialiserMains($partie->idpartie,$partie->nbjoueurs);
-              //Pioche::tirerCarte($idpartie,$idj1);
+              Pioche::tirerCarte($idpartie,$partie->idj1);
+              Pioche::tirerCarte($idpartie,$utilisateur->id);
             }
             header('Location: /partie/'.$idpartie.'/',true,302);
             exit();
